@@ -1,0 +1,52 @@
+version: '3.9'
+
+services:
+  backend:
+    build: ./job_craft_backend
+    container_name: jobportal-backend
+    ports:
+      - 2005:8082   # host:container (backend exposes 8082, mapped to 2005)
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/jobportal?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: Bhavya@123
+    depends_on:
+      - db
+    networks:
+      - jobportal-network
+
+  frontend:
+    build: ./job-craft-frontend
+    container_name: jobportal-frontend
+    ports:
+      - 80:80       # host:container (frontend runs on 80)
+    depends_on:
+      - backend
+    networks:
+      - jobportal-network
+
+  db:
+    image: mysql:8.0
+    container_name: jobportal-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: Bhavya@123
+      MYSQL_DATABASE: jobportal
+    ports:
+      - 3307:3306   # host port 3307 → container 3306
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - jobportal-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-pBhavya@123"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  db_data:
+
+networks:
+  jobportal-network:
+    driver: bridge
