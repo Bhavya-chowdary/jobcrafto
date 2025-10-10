@@ -12,10 +12,10 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4   # ✅ Updated to latest version
 
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4   # ✅ Updated to latest version
         with:
           node-version: '20'
 
@@ -32,7 +32,7 @@ jobs:
         working-directory: ./job-craft-frontend/job-craft-frontend
 
       - name: Upload build artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4   # ✅ Updated from v3 → v4
         with:
           name: frontend-build
           path: ./job-craft-frontend/job-craft-frontend/build
