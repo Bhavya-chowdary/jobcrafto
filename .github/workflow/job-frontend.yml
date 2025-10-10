@@ -21,18 +21,18 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-        working-directory: ./jobcrafto/frontend
+        working-directory: ./job-craft-frontend/job-craft-frontend
 
       - name: Build frontend
         run: npm run build
-        working-directory: ./jobcrafto/frontend
+        working-directory: ./job-craft-frontend/job-craft-frontend
 
       - name: Run tests
         run: npm test -- --watchAll=false
-        working-directory: ./jobcrafto/frontend
+        working-directory: ./job-craft-frontend/job-craft-frontend
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v3
         with:
           name: frontend-build
-          path: ./jobcrafto/frontend/build
+          path: ./job-craft-frontend/job-craft-frontend/build

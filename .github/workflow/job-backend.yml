@@ -22,14 +22,14 @@ jobs:
 
       - name: Build backend
         run: ./mvnw clean package -DskipTests
-        working-directory: ./jobcrafto/backend
+        working-directory: ./job_craft_backend
 
       - name: Run tests
         run: ./mvnw test
-        working-directory: ./jobcrafto/backend
+        working-directory: ./job_craft_backend
 
       - name: Upload backend JAR
         uses: actions/upload-artifact@v3
         with:
           name: backend-jar
-          path: ./jobcrafto/backend/target/*.jar
+          path: ./job_craft_backend/target/*.jar
