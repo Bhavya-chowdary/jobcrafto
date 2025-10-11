@@ -14,7 +14,7 @@ services:
     build: ./job-craft-frontend/job-craft-frontend
     container_name: jobcrafto-frontend
     ports:
-      - "3000:"  # host:container
+      - "3000:80"  # host:container
     depends_on:
       - backend
     networks:

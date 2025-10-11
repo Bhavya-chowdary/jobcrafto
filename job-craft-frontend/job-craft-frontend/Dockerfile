@@ -18,7 +18,7 @@ FROM nginx:alpine
 COPY --from=build /app/build /usr/share/nginx/html
 
 # Expose frontend port
-EXPOSE 3000
+EXPOSE 3000:80
 
 # Start Nginx
 CMD ["nginx", "-g", "daemon off;"]
