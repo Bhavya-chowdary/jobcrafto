@@ -1,11 +1,9 @@
-version: "3.9"
-
 services:
   backend:
     build: ./job_craft_backend
     container_name: jobcrafto-backend
     ports:
-      - "2005:2005"
+      - "2006:2005"
     networks:
       - jobcrafto-network
     restart: always
@@ -14,7 +12,7 @@ services:
     build: ./job-craft-frontend/job-craft-frontend
     container_name: jobcrafto-frontend
     ports:
-      - "3000:80"  # host:container
+      - "3000:80"
     depends_on:
       - backend
     networks:

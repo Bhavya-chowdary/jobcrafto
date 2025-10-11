@@ -12,24 +12,24 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4   # ✅ Updated to latest version
+        uses: actions/checkout@v4
 
       - name: Set up Java
-        uses: actions/setup-java@v4   # ✅ Updated to latest version
+        uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
           java-version: '17'
 
       - name: Build backend
         run: ./mvnw clean package -DskipTests
-        working-directory: ./job_craft_backend
+        working-directory: job_craft_backend
 
       - name: Run tests
         run: ./mvnw test
-        working-directory: ./job_craft_backend
+        working-directory: job_craft_backend
 
       - name: Upload backend JAR
-        uses: actions/upload-artifact@v4   # ✅ Updated from v3 → v4
+        uses: actions/upload-artifact@v4
         with:
           name: backend-jar
-          path: ./job_craft_backend/target/*.jar
+          path: job_craft_backend/target/*.jar
