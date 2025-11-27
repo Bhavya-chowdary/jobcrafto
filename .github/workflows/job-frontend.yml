@@ -31,4 +31,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: frontend-build
-          path: job-craft-frontend/job-craft-frontend/build
+          path: job-craft-frontend/job-craft-frontend/dist
