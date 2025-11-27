@@ -1,4 +1,4 @@
-name: Build and Push Frontend + Backend to Docker Hub
+name: Build and Push Frontend + Backend Images
 
 on:
   push:
@@ -12,9 +12,9 @@ permissions:
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
-    
+
     steps:
-      - name: Checkout repository
+      - name: Checkout repo
         uses: actions/checkout@v4
 
       - name: Set up QEMU
@@ -29,23 +29,23 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      # ------------------ FRONTEND IMAGE ------------------
+      # ---------------- FRONTEND ------------------
       - name: Build and Push Frontend Image
         uses: docker/build-push-action@v5
         with:
-          context: ./frontend
-          file: ./frontend/Dockerfile
+          context: ./job-craft-frontend
+          file: ./job-craft-frontend/Dockerfile
           push: true
           tags: |
             athukuribhavya/frontend:latest
             athukuribhavya/frontend:${{ github.sha }}
 
-      # ------------------ BACKEND IMAGE -------------------
+      # ---------------- BACKEND -------------------
       - name: Build and Push Backend Image
         uses: docker/build-push-action@v5
         with:
-          context: ./backend
-          file: ./backend/Dockerfile
+          context: ./job_craft_backend
+          file: ./job_craft_backend/Dockerfile
           push: true
           tags: |
             athukuribhavya/backend:latest
