@@ -20,6 +20,10 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
+      - name: Give execute permission to mvnw
+        run: chmod +x mvnw
+        working-directory: job_craft_backend
+
       - name: Build backend (skip all tests)
         run: ./mvnw clean package -DskipTests
         working-directory: job_craft_backend
