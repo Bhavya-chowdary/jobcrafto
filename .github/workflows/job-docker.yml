@@ -33,14 +33,22 @@ jobs:
       - name: Build and Push Frontend Image
         uses: docker/build-push-action@v5
         with:
-          context: ./job-craft-frontend
-          file: ./job-craft-frontend/Dockerfile
+          context: ./job-craft-frontend/job-craft-frontend
+          file: ./job-craft-frontend/job-craft-frontend/Dockerfile
           push: true
           tags: |
             athukuribhavya/frontend:latest
             athukuribhavya/frontend:${{ github.sha }}
 
       # ---------------- BACKEND -------------------
+      - name: Give execute permission to mvnw
+        run: chmod +x mvnw
+        working-directory: job_craft_backend
+
+      - name: Build backend JAR
+        run: ./mvnw clean package -DskipTests
+        working-directory: job_craft_backend
+
       - name: Build and Push Backend Image
         uses: docker/build-push-action@v5
         with:
